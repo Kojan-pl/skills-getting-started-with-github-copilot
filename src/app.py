@@ -14,13 +14,13 @@ from pathlib import Path
 app = FastAPI(title="Mergington High School API",
               description="API for viewing and signing up for extracurricular activities")
 
-            # Mount the static files directory
-            current_dir = Path(__file__).parent
-            app.mount("/static", StaticFiles(directory=os.path.join(Path(__file__).parent,
-                      "static")), name="static")
+# Mount the static files directory
+current_dir = Path(__file__).parent
+app.mount("/static", StaticFiles(directory=os.path.join(Path(__file__).parent,
+          "static")), name="static")
 
-            # In-memory activity database
-            activities = {
+# In-memory activity database
+activities = {
                 "Chess Club": {
                     "description": "Learn strategies and compete in chess tournaments",
                     "schedule": "Fridays, 3:30 PM - 5:00 PM",
@@ -75,17 +75,17 @@ app = FastAPI(title="Mergington High School API",
                     "max_participants": 18,
                     "participants": ["mia@mergington.edu", "ethan@mergington.edu"]
                 }
-            }
+                        }
 
 
-            @app.get("/")
-            def root():
-                return RedirectResponse(url="/static/index.html")
+@app.get("/")
+def root():
+    return RedirectResponse(url="/static/index.html")
 
 
-            @app.get("/activities")
-            def get_activities():
-                return activities
+@app.get("/activities")
+def get_activities():
+    return activities
 
 
 @app.post("/activities/{activity_name}/signup")
